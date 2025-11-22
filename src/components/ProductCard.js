@@ -1,6 +1,7 @@
 export function ProductCard({
   product,
-  background = "slategrey",
+  background = "slategray",
+  onPurchase,
   ...restProps
 }) {
   return (
@@ -8,27 +9,23 @@ export function ProductCard({
       style={{
         background,
         width: "100%",
-        border: "1px solid #ccc",
+        border: "1px solid white",
         borderRadius: "8px",
         padding: "16px",
-        maxWidth: "200px",
         textAlign: "center",
       }}
     >
       <h2>{product.title}</h2>
-      <img src={product.imageSrc} alt={product.altText} {...restProps} />
+      <img src={product.imageSrc} alt={product.title} {...restProps} />
       <p>Specification:</p>
-      <ul
-        style={{
-          listStyle: "none",
-          padding: 0,
-        }}
-      >
-        <li>{product.specifications[0]}</li>
-        <li>{product.specifications[1]}</li>
-        <li>{product.specifications[2]}</li>
+      <ul style={{ listStyle: "none", padding: 0 }}>
+        <li>{product.specification[0]}</li>
+        <li>{product.specification[1]}</li>
+        <li>{product.specification[2]}</li>
       </ul>
-      <button>Buy (From {product.price})</button>
+      <button onClick={() => onPurchase(product)}>
+        Buy (From ${product.price})
+      </button>
     </article>
   );
 }
